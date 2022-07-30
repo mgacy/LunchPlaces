@@ -5,10 +5,11 @@ on:
       branches: [ main ]
 
 env:
-  GRAPH-OUTPUT: 'images/dependencies.svg'
+  DOT_OUTPUT: 'images/dependencies.dot'
+  GRAPH_OUTPUT: 'images/dependencies.svg'
 
 jobs:
-  foo:
+  dependency_graphs:
     name: Dependency Graphs
     runs-on: macos-12
     steps:
@@ -20,10 +21,15 @@ jobs:
 
     -  name: Show Dependencies
        run: |
+          NO_DEPENDENCY_MESSAGE="No external dependencies found"
+
           for dir in Packages/*/ ; do
-              out=${dir}$GRAPH-OUTPUT
-              echo "$out"
-              swift package --package-path $dir show-dependencies --format dot | grep -v "^No" | dot -Tsvg -o $out
+              out=${dir}$GRAPH_OUTPUT
+              dot=${dir}$DOT_OUTPUT
+              swift package --package-path $dir show-dependencies --format dot -o $dot
+              if ! grep -q $NO_DEPENDENCY_MESSAGE "$dot"; then
+                  dot -Tsvg $dot > $out
+              fi
           done
 
     - name: Commit
