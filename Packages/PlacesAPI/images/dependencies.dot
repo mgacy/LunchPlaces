@@ -1,10 +1,10 @@
 digraph DependenciesGraph {
 node [shape = box]
-"/Users/runner/work/LunchPlaces/LunchPlaces/Packages/PlacesAPI" [label="placesapi\n/Users/runner/work/LunchPlaces/LunchPlaces/Packages/PlacesAPI\nunspecified"]
-"/Users/runner/work/LunchPlaces/LunchPlaces/Packages/Core" [label="core\n/Users/runner/work/LunchPlaces/LunchPlaces/Packages/Core\nunspecified"]
-"/Users/runner/work/LunchPlaces/LunchPlaces/Packages/PlacesAPI" -> "/Users/runner/work/LunchPlaces/LunchPlaces/Packages/Core"
-"/Users/runner/work/LunchPlaces/LunchPlaces/Packages/Model" [label="model\n/Users/runner/work/LunchPlaces/LunchPlaces/Packages/Model\nunspecified"]
-"/Users/runner/work/LunchPlaces/LunchPlaces/Packages/PlacesAPI" -> "/Users/runner/work/LunchPlaces/LunchPlaces/Packages/Model"
+"/home/runner/work/LunchPlaces/LunchPlaces/Packages/PlacesAPI" [label="placesapi\n/home/runner/work/LunchPlaces/LunchPlaces/Packages/PlacesAPI\nunspecified"]
+"/home/runner/work/LunchPlaces/LunchPlaces/Packages/Core" [label="core\n/home/runner/work/LunchPlaces/LunchPlaces/Packages/Core\nunspecified"]
+"/home/runner/work/LunchPlaces/LunchPlaces/Packages/PlacesAPI" -> "/home/runner/work/LunchPlaces/LunchPlaces/Packages/Core"
+"/home/runner/work/LunchPlaces/LunchPlaces/Packages/Model" [label="model\n/home/runner/work/LunchPlaces/LunchPlaces/Packages/Model\nunspecified"]
+"/home/runner/work/LunchPlaces/LunchPlaces/Packages/PlacesAPI" -> "/home/runner/work/LunchPlaces/LunchPlaces/Packages/Model"
 "http://github.com/objcio/tiny-networking.git" [label="tiny-networking\nhttp://github.com/objcio/tiny-networking.git\nunspecified"]
-"/Users/runner/work/LunchPlaces/LunchPlaces/Packages/PlacesAPI" -> "http://github.com/objcio/tiny-networking.git"
+"/home/runner/work/LunchPlaces/LunchPlaces/Packages/PlacesAPI" -> "http://github.com/objcio/tiny-networking.git"
 }

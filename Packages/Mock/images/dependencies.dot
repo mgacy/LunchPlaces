@@ -1,6 +1,6 @@
 digraph DependenciesGraph {
 node [shape = box]
-"/Users/runner/work/LunchPlaces/LunchPlaces/Packages/Mock" [label="mock\n/Users/runner/work/LunchPlaces/LunchPlaces/Packages/Mock\nunspecified"]
-"/Users/runner/work/LunchPlaces/LunchPlaces/Packages/Model" [label="model\n/Users/runner/work/LunchPlaces/LunchPlaces/Packages/Model\nunspecified"]
-"/Users/runner/work/LunchPlaces/LunchPlaces/Packages/Mock" -> "/Users/runner/work/LunchPlaces/LunchPlaces/Packages/Model"
+"/home/runner/work/LunchPlaces/LunchPlaces/Packages/Mock" [label="mock\n/home/runner/work/LunchPlaces/LunchPlaces/Packages/Mock\nunspecified"]
+"/home/runner/work/LunchPlaces/LunchPlaces/Packages/Model" [label="model\n/home/runner/work/LunchPlaces/LunchPlaces/Packages/Model\nunspecified"]
+"/home/runner/work/LunchPlaces/LunchPlaces/Packages/Mock" -> "/home/runner/work/LunchPlaces/LunchPlaces/Packages/Model"
 }
