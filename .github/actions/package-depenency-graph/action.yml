@@ -1,0 +1,42 @@
+name: Package Dependency Graph
+description: Generate dependency graphs for Swift packages.
+inputs:
+  package-directory:
+    description: The directory to scan for packages.
+    required: false
+    default: Packages
+  output-directory:
+    description: The directory within each package where images will be written.
+    required: false
+    default: images
+
+runs:
+  using: composite
+  steps:
+    - name: Install Graphviz (Linux)
+      if: runner.os == 'Linux'
+      shell: bash
+      run: |
+        sudo apt-get update
+        sudo apt-get install graphviz
+
+    - name: Install Graphviz (macOS)
+      if: runner.os == 'macOS'
+      shell: bash
+      run: |
+        brew update
+        brew install graphviz
+
+    - name: Generate depenency graphs
+      id: generate-graphs
+      shell: bash
+      run: |
+        NO_DEPENDENCY_MESSAGE="No external dependencies found"
+
+        for dir in ${{ inputs.package-directory }}/*/ ; do
+          dot_file="$dir${{ inputs.output-directory }}/dependencies.dot"
+          swift package --package-path $dir show-dependencies --format dot -o $dot_file
+          if ! grep -q $NO_DEPENDENCY_MESSAGE $dot_file; then
+            dot -Tsvg $dot_file > "$dir${{ inputs.output-directory }}/dependencies.svg"
+          fi
+        done
