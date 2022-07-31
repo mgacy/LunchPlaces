@@ -21,18 +21,17 @@ jobs:
         sudo apt-get update
         sudo apt-get install graphviz
 
-    -  name: Show Dependencies
-       run: |
-          NO_DEPENDENCY_MESSAGE="No external dependencies found"
+    - name: Show Dependencies
+      run: |
+        NO_DEPENDENCY_MESSAGE="No external dependencies found"
 
-          for dir in Packages/*/ ; do
-              out=${dir}$GRAPH_OUTPUT
-              dot=${dir}$DOT_OUTPUT
-              swift package --package-path $dir show-dependencies --format dot -o $dot
-              if ! grep -q $NO_DEPENDENCY_MESSAGE "$dot"; then
-                  dot -Tsvg $dot > $out
-              fi
-          done
+        for dir in Packages/*/ ; do
+          dot_file="$dir$DOT_OUTPUT"
+          swift package --package-path $dir show-dependencies --format dot -o $dot_file
+          if ! grep -q $NO_DEPENDENCY_MESSAGE $dot_file; then
+            dot -Tsvg $dot_file > "$dir$GRAPH_OUTPUT"
+          fi
+        done
 
     - name: Commit
       uses: stefanzweifel/git-auto-commit-action@v4
