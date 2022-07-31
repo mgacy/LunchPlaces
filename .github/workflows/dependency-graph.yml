@@ -4,10 +4,6 @@ on:
     push:
       branches: [ main ]
 
-env:
-  DOT_OUTPUT: 'images/dependencies.dot'
-  GRAPH_OUTPUT: 'images/dependencies.svg'
-
 jobs:
   dependency_graphs:
     name: Dependency Graphs
