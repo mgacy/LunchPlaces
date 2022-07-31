@@ -38,6 +38,7 @@ runs:
 
         for dir in ${{ inputs.package-directory }}/*/ ; do
           dot_file="$dir${{ inputs.output-directory }}"
+          echo "$dot_file"
           swift package --package-path $dir show-dependencies --format dot -o $dot_file
           if ! grep -q $NO_DEPENDENCY_MESSAGE $dot_file; then
             dot -Tsvg $dot_file > "$dir${{ inputs.output-directory }}"
