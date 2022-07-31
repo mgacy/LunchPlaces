@@ -5,11 +5,14 @@ inputs:
     description: The directory to scan for packages.
     required: false
     default: Packages
-  output-directory:
-    description: The directory within each package where images will be written.
+  dot-output-path:
+    description: The path, relative to each package, where the Graphviz DOT definition of the package's dependency graph will be written.
     required: false
-    default: images
-
+    default: images/dependencies.dot
+  image-output-path:
+    description: The path, relative to each package, where the package's dependency graph will be written.
+    required: false
+    default: images/dependencies.svg
 runs:
   using: composite
   steps:
@@ -34,9 +37,9 @@ runs:
         NO_DEPENDENCY_MESSAGE="No external dependencies found"
 
         for dir in ${{ inputs.package-directory }}/*/ ; do
-          dot_file="$dir${{ inputs.output-directory }}/dependencies.dot"
+          dot_file="$dir${{ inputs.output-directory }}"
           swift package --package-path $dir show-dependencies --format dot -o $dot_file
           if ! grep -q $NO_DEPENDENCY_MESSAGE $dot_file; then
-            dot -Tsvg $dot_file > "$dir${{ inputs.output-directory }}/dependencies.svg"
+            dot -Tsvg $dot_file > "$dir${{ inputs.output-directory }}"
           fi
         done
