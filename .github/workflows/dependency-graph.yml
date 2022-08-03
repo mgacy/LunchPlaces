@@ -19,10 +19,10 @@ jobs:
     steps:
     - name: Git Checkout main
       uses: actions/checkout@v3
-
     - name: Install Graphviz
-      run: sudo apt-get install graphviz
-
+      run: |
+        sudo apt-get update
+        sudo apt-get install graphviz
     -  name: Show Dependencies
        run: |
           NO_DEPENDENCY_MESSAGE="No external dependencies found"
