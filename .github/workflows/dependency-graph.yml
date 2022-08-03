@@ -1,8 +1,11 @@
 name: Generate Dependency Graphs
 on:
   workflow_dispatch:
-    push:
-      branches: [ main ]
+  pull_request:
+    types:
+      - opened
+      - reopened
+      - ready_for_review
 
 env:
   DOT_OUTPUT: 'images/dependencies.dot'
@@ -11,6 +14,7 @@ env:
 jobs:
   dependency_graphs:
     name: Dependency Graphs
+    if: ${{ !github.event.isDraft }}
     runs-on: ubuntu-latest
     steps:
     - name: Git Checkout main
