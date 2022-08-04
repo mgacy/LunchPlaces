@@ -13,8 +13,8 @@ env:
 
 jobs:
   dependency_graphs:
+    if: github.event.pull_request.draft == false
     name: Dependency Graphs
-    if: github.event.isDraft == false
     runs-on: ubuntu-latest
     steps:
     - name: Git Checkout main
