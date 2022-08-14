@@ -5,10 +5,10 @@ inputs:
     description: The directory to scan for target dependencies.
     required: true
     # default: Packages
-  json-output-path:
-    description: The path, relative to `features-directory`, where the JSON definition of the package's target dependency graph will be written.
-    required: false
-    default: images/target-dependencies.json
+  # json-output-path:
+  #   description: The path, relative to `features-directory`, where the JSON definition of the package's target dependency graph will be written.
+  #   required: false
+  #   default: images/target-dependencies.json
   image-output-path:
     description: The path, relative to `features-directory`, where the package's target dependency graph will be written.
     required: false
@@ -21,18 +21,19 @@ runs:
       id: generate-graphs
       shell: bash
       run: |
-        # wakinchan/generate-target-dependencies.sh
+        # From: wakinchan/generate-target-dependencies.sh
         # https://gist.github.com/wakinchan/75bc1b75c812e432561a639566af518b
-        packages=`swift package --package-path $features-directory describe --type json`
+        packages=`swift package --package-path ${{ inputs.features-directory }} describe --type json`
         targets=`echo $packages | jq '.targets'`
         target_names=`echo $targets | jq -r '.[] | .name'`
-        body=""
         template=`cat <<EOF
         digraph DependenciesGraph {
         node [shape = box]
         %BODY%
         }
         `
+
+        body=""
         for target_name in `echo $target_names`; do
           label='"'$target_name'" [label="'$target_name'"]'
           body+="$label\n"
@@ -42,7 +43,7 @@ runs:
             body+="$target\n"
           done
         done
-        echo "$template" | sed -e 's/%BODY%/'"$body"'/'
+        echo "$template" | sed -e 's/%BODY%/'"$body"'/' | dot -Tsvg -o ${{ inputs.features-directory }}${{ inputs.image-output-path }}
 
         # NO_DEPENDENCY_MESSAGE="No external dependencies found"
         # for dir in ${{ inputs.package-directory }}/*/ ; do
