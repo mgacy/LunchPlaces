@@ -43,7 +43,7 @@ runs:
             body+="$target\n"
           done
         done
-        echo "$template" | sed -e 's/%BODY%/'"$body"'/' | dot -Tsvg -o ${{ inputs.features-directory }}${{ inputs.image-output-path }}
+        echo "$template" | sed -e 's/%BODY%/'"$body"'/' | dot -Tsvg -o ${{ inputs.features-directory }}/${{ inputs.image-output-path }}
 
         # NO_DEPENDENCY_MESSAGE="No external dependencies found"
         # for dir in ${{ inputs.package-directory }}/*/ ; do
