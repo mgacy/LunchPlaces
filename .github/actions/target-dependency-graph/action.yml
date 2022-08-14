@@ -17,18 +17,6 @@ inputs:
 runs:
   using: composite
   steps:
-    - name: Install Graphviz (Linux)
-      if: runner.os == 'Linux'
-      shell: bash
-      run: |
-        sudo apt-get update
-        sudo apt-get install graphviz
-    - name: Install Graphviz (macOS)
-      if: runner.os == 'macOS'
-      shell: bash
-      run: |
-        brew update
-        brew install graphviz
     - name: Generate target depenency graphs
       id: generate-graphs
       shell: bash
